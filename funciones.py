@@ -11,8 +11,8 @@ def insertar_gasto():
     cursor = None
 
     try:
-        conn = conectar()          # Crear conexión
-        cursor = conn.cursor()     # Crear cursor
+        conn = conectar()          
+        cursor = conn.cursor()     
 
         sql = """
         INSERT INTO tipo_gasto (categoria, cantidad, descripcion, fecha)
@@ -22,15 +22,15 @@ def insertar_gasto():
         valores = (categoria, cantidad, descripcion, fecha)
 
         cursor.execute(sql, valores)
-        conn.commit()               # AQUÍ es donde debes hacer commit
+        conn.commit()               
 
-        print("✔ Gasto insertado correctamente.")
+        print("Gasto insertado correctamente.")
 
     except Exception as e:
-        print("❌ Error al insertar el gasto:", e)
+        print("Error al insertar el gasto:", e)
 
     finally:
-        # Cerrar cursor y conexión SOLO si existen
+        
         if cursor:
             cursor.close()
         if conn:
