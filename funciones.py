@@ -29,13 +29,6 @@ def insertar_gasto():
     except Exception as e:
         print("Error al insertar el gasto:", e)
 
-    finally:
-        
-        if cursor:
-            cursor.close()
-        if conn:
-            conn.close()
-
 def mostrar_gastos():
 
     conn = None
@@ -52,13 +45,6 @@ def mostrar_gastos():
 
     except Exception as e:
         print("Error al mostrar los gastos:", e)
-
-    finally:
-        
-        if cursor:
-            cursor.close()
-        if conn:
-            conn.close()
 
 def eliminar_gasto():
 
@@ -83,19 +69,33 @@ def eliminar_gasto():
     except Exception as e:
         print("Error al eliminar: ",e)
 
+def mostrar_gasto_categoria():
     
-    finally:
-        
-        if cursor:
-            cursor.close()
-        if conn:
-            conn.close()
+    conn = None
+    cursor = None
 
+    try:
+        conn = conectar()
+        cursor = conn.cursor()
+
+        cursor.execute("select * from tipo_gasto;")
+        mostrar = cursor.fetchall()
+        print(mostrar)
+
+        categoria = input("ingrese la categoria la cual quiere mostrar: ")
+
+        cursor.execute(f"select * from tipo_gasto where categoria = '{categoria}';")
+        mostrar_categoria = cursor.fetchall()
+        print(mostrar_categoria)
+
+    except Exception as e:
+        print("error a mostrar gasto: ",e)
 
 def menu():
     print("1. añadir un gasto")
     print("2. mostrar gastos añadidios")
     print("3. eliminar gasto")
+    print("4. mostrar gasto por categoria")
     opc = int(input("eliga una opcion: "))
 
     if opc == 1:
@@ -104,6 +104,8 @@ def menu():
         mostrar_gastos()
     elif opc == 3:
         eliminar_gasto()
+    elif opc == 4:
+        mostrar_gasto_categoria()
     else:
         print("eliga una opcion valida")
 

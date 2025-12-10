@@ -11,7 +11,7 @@ create table tipo_gasto (
 
 select * from tipo_gasto;
 
-delete from tipo_gasto where id = 2;
+select * from tipo_gasto where categoria == cafe;
 
 
 
