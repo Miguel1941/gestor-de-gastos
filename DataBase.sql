@@ -9,4 +9,9 @@ create table tipo_gasto (
     fecha date
 );
 
+select * from tipo_gasto;
+
+delete from tipo_gasto where id = 2;
+
+
 
