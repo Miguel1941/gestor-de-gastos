@@ -11,7 +11,7 @@ create table tipo_gasto (
 
 select * from tipo_gasto;
 
-select * from tipo_gasto where categoria == cafe;
+select * from tipo_gasto where categoria = "cafe";
 
 
 
