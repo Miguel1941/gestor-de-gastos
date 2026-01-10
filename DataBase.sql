@@ -13,5 +13,8 @@ select * from tipo_gasto;
 
 select * from tipo_gasto where categoria = "cafe";
 
+delete from tipo_gasto where id = 4;
 
-
+UPDATE tipo_gasto
+SET categoria = "cafe", cantidad = 100000
+WHERE id = 4;
