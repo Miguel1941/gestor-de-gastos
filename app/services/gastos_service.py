@@ -1,36 +1,29 @@
 
-from conexion import conectar
+from app.db.conexion import conectar
 
-def insertar_gasto():
-    categoria = input("Categoría: ")
-    cantidad = float(input("Cantidad: "))
-    descripcion = input("Descripción: ")
-    fecha = input("Fecha (YYYY-MM-DD): ")
+def crear_gasto(categoria: str, cantidad: float, descripcion: str, fecha: str) -> None:
 
     conn = None
     cursor = None
 
     try:
-        conn = conectar()          
-        cursor = conn.cursor()     
+        conn = conectar()
+        cursor = conn.cursor()
 
-        sql = """
-        INSERT INTO tipo_gasto (categoria, cantidad, descripcion, fecha)
-        VALUES (%s, %s, %s, %s)
-        """
+        cursor.execute(
+            """
+            INSERT INTO tipo_gasto (categoria, cantidad, descripcion, fecha)
+            VALUES (%s, %s, %s, %s)
+            """,
+            (categoria, cantidad, descripcion, fecha)
+        )
 
-        valores = (categoria, cantidad, descripcion, fecha)
+        conn.commit()
 
-        cursor.execute(sql, valores)
-        conn.commit()               
-
-        print("Gasto insertado correctamente.")
-
-    except Exception as e:
-        print("Error al insertar el gasto:", e)
+    except Exception as error:
+        raise error
 
     finally:
-        
         if cursor:
             cursor.close()
         if conn:
