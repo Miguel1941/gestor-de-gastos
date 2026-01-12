@@ -1,182 +1,76 @@
 
+# este arhcivo solo tendra las funciones base sin pedirle al usuario nada
+
 from app.db.conexion import conectar
 
-def crear_gasto(categoria: str, cantidad: float, descripcion: str, fecha: str) -> None:
+def crear_gasto(categoria, cantidad, descripcion, fecha):
+    conn = conectar()   # funcion de conexion.py conecta el codigo con el database
+    cursor = conn.cursor() # este linea es el intermedario de conectar el codigo con el database
+    
+    # comando de mysql
+    sql = """
+    INSERT INTO tipo_gasto (categoria, cantidad, descripcion, fecha)
+    VALUES (%s, %s, %s, %s)
+    """
+    cursor.execute(sql, (categoria, cantidad, descripcion, fecha))  # ejecuta comando de mysql usando los valores validos
+    conn.commit()   # se encarga de guardar los cambios echos en la consulta 
 
-    conn = None
-    cursor = None
+    cursor.close()  # se cierra el cursor
+    conn.close()   # se cierra la coneccion con el database
 
-    try:
-        conn = conectar()
-        cursor = conn.cursor()
-
-        cursor.execute(
-            """
-            INSERT INTO tipo_gasto (categoria, cantidad, descripcion, fecha)
-            VALUES (%s, %s, %s, %s)
-            """,
-            (categoria, cantidad, descripcion, fecha)
-        )
-
-        conn.commit()
-
-    except Exception as error:
-        raise error
-
-    finally:
-        if cursor:
-            cursor.close()
-        if conn:
-            conn.close()
 
 def mostrar_gastos():
+    conn = conectar()
+    cursor = conn.cursor()
 
-    conn = None
-    cursor = None
+    cursor.execute("SELECT * FROM tipo_gasto") # comando de mysql
+    gastos = cursor.fetchall()
 
-    try:
-        conn = conectar()          
-        cursor = conn.cursor()
+    cursor.close()
+    conn.close()
 
-        cursor.execute("select * from tipo_gasto;")
-        resultados = cursor.fetchall()
-        print(resultados)
+    return gastos
 
-    except Exception as e:
-        print("Error al mostrar los gastos:", e)
+
+def eliminar_gasto(gasto_id):
+    conn = conectar()
+    cursor = conn.cursor()
+
+    cursor.execute("DELETE FROM tipo_gasto WHERE id = %s", (gasto_id,)) # comando de mysql
+    conn.commit()
+
+    cursor.close()
+    conn.close()
+
+
+def obtener_gastos_por_categoria(categoria):
+    conn = conectar()
+    cursor = conn.cursor()
+
+    cursor.execute(
+        "select * from tipo_gasto WHERE categoria = %s", #comando de mysql
+        (categoria,)
+    )
+    gastos = cursor.fetchall()
+
+    cursor.close()
+    conn.close()
+
+    return gastos
+
+
+def actualizar_gasto(gasto_id, categoria, cantidad, descripcion, fecha):
+    conn = conectar()
+    cursor = conn.cursor()
     
-    finally:
-        
-        if cursor:
-            cursor.close()
-        if conn:
-            conn.close()
+    # comando de mysql
+    sql = """
+    UPDATE tipo_gasto
+    SET categoria=%s, cantidad=%s, descripcion=%s, fecha=%s
+    WHERE id=%s
+    """
+    cursor.execute(sql, (categoria, cantidad, descripcion, fecha, gasto_id))
+    conn.commit()
 
-def eliminar_gasto():
-
-    conn = None
-    cursor = None
-
-    try:
-        conn = conectar()          
-        cursor = conn.cursor()
-
-        mostrar_gastos()
-
-        id = int(input("ingrese el id del gasto que desea eliminar: "))
-
-        cursor.execute(f"delete from tipo_gasto where id = {id};")
-        conn.commit()
-
-        print("gasto eliminado correctamente")
-
-
-
-    except Exception as e:
-        print("Error al eliminar: ",e)
-
-    finally:
-        
-        if cursor:
-            cursor.close()
-        if conn:
-            conn.close()
-
-def mostrar_gasto_categoria():
-    
-    conn = None
-    cursor = None
-
-    try:
-        conn = conectar()
-        cursor = conn.cursor()
-
-        categoria = input("ingrese la categoria la cual quiere mostrar: ")
-
-        cursor.execute(f"select * from tipo_gasto where categoria = '{categoria}';")
-        mostrar_categoria = cursor.fetchall()
-        print(mostrar_categoria)
-
-    except Exception as e:
-        print("error a mostrar gasto: ",e)
-
-    finally:
-        
-        if cursor:
-            cursor.close()
-        if conn:
-            conn.close()
-
-def actualizar_gasto():
-
-    conn = None
-    cursor = None
-
-    try:
-
-        conn = conectar()
-        cursor = conn.cursor()
-
-
-        cursor.execute("select * from tipo_gasto;")
-        mostrar = cursor.fetchall()
-        print(mostrar)
-
-        id = int(input("ingrese el id del gasto que desee actualizar: "))
-
-        categoria = input("Categoría: ")
-        cantidad = float(input("Cantidad: "))
-        descripcion = input("Descripción: ")
-        fecha = input("Fecha (YYYY-MM-DD): ")
-
-        cursor.execute(f"update tipo_gasto set categoria = '{categoria}', cantidad = {cantidad},descripcion = '{descripcion}',fecha = '{fecha}'  where id = {id};")
-        conn.commit()
-        print("el gasto se a actulizado")
-
-        cursor.execute("select * from tipo_gasto;")
-        mostrar = cursor.fetchall()
-        print(mostrar)
-
-
-    except Exception as e:
-        print("error al actualizar el gasto: ",e)
-
-    finally:
-        
-        if cursor:
-            cursor.close()
-        if conn:
-            conn.close()
-
-def menu():
-
-    while True: 
-
-        print("0. salir del programa")
-        print("1. añadir un gasto")
-        print("2. mostrar gastos añadidios")
-        print("3. eliminar gasto")
-        print("4. mostrar gasto por categoria")
-        print("5. actualizar gasto")
-        opc = int(input("eliga una opcion: "))
-
-        if opc == 0:
-            exit()
-        elif opc == 1:
-            insertar_gasto()
-        elif opc == 2:
-            mostrar_gastos()
-        elif opc == 3:
-            eliminar_gasto()
-        elif opc == 4:
-            mostrar_gasto_categoria()
-        elif opc == 5:
-            actualizar_gasto()
-        else:
-            print("eliga una opcion valida")
-        
-
-if __name__ == "__main__":
-    menu()
-
- 
+    cursor.close()
+    conn.close()
