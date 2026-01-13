@@ -1,8 +1,9 @@
-from app.services.gastos_service import menu
+from app.console.gestor_gastos_console import menu
 
 
 def main():
     menu()
+
 
 
 if __name__ == "__main__":
