@@ -19,19 +19,19 @@ def menu():
             descrpcion = input("ingrese la descripcion: ")
             date = input("ingrese la fecha: YYYY-MM-DD: ")
 
-            print(crear_gasto(categoria, cantidad, descrpcion, date))
+            crear_gasto(categoria, cantidad, descrpcion, date)
 
         elif opc == 2:
             print(mostrar_gastos())
 
         elif opc == 3:
             gasto_id = int(input("ingrese el id del gasto que desea eliminar: "))
-            print(eliminar_gasto(gasto_id))
+            eliminar_gasto(gasto_id)
 
         elif opc == 4:
             categoria = input("ingrese la categoria que desea obtener: ")
 
-            print(obtener_gastos_por_categoria(categoria))
+            obtener_gastos_por_categoria(categoria)
 
         elif opc == 5:
             print("ingrese los datos del gasto que desea acualizar con el mismo ID:")
@@ -40,9 +40,15 @@ def menu():
             cantidad = int(input("ingrese la cantidad gastada: "))
             descrpcion = input("ingrese la descripcion: ")
             fecha = input("ingrese la fecha: YYYY-MM-DD: ")
-            print(actualizar_gasto(gasto_id,categoria,cantidad,descrpcion,fecha))
-            print("gasto actulalizado correctamente")
-    
+
+            actualizar_gasto(gasto_id, categoria, cantidad, descrpcion, fecha)
+            print("gasto actualizado correctamente")
+
+        elif opc == 6:
+            break
+
+        else:
+            print("ingrese una opcion valida")
 
 
 
