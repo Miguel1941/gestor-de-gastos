@@ -1,38 +1,79 @@
+Gestor de Gastos 🧾$
 
-📊 Gestor de Gastos en Python (Consola)
+Este proyecto tiene como objetivo reforzar conocimientos de python junto a Mysql
+usando consultas basicas de Mysql y poder conectarlas directo con pythona la vez de poder ejecutar en consola.
 
-Proyecto desarrollado en Python que permite gestionar gastos personales usando una base de datos MySQL, aplicando conceptos fundamentales de programación, CRUD, bases de datos y control de versiones con Git.
+Este proyecto tambien se ralizo con el objetivo de organizar un proyecto  correctamente, comprender el uso de ramas en git y mejorar capacidad de logica al momento de programar.
 
-Actualmente el proyecto funciona por consola. La interfaz gráfica (por ejemplo con Tkinter) queda planificada para una etapa futura.
+---
 
-🚀 Objetivo del proyecto
+📌 Funcionalidades
 
-El objetivo principal de este proyecto es:
+El programa tiene las siguientes funciones:
 
-Practicar Python aplicado a bases de datos
+> Crear un gasto
 
-Implementar un CRUD completo
+>Mostrar todos los gastos
 
-Entender la conexión entre Python y MySQL
+>Eliminar un gasto por ID
 
-Aprender buenas prácticas básicas de estructura y control de errores
+>Consultar gastos por categoría
 
-Preparar una base sólida antes de enfocarme en:
+>Actualizar un gasto existente
 
-Java
+>Ejecutar todo desde un menú en consola
 
-Back-end
+---
 
-Análisis de datos
+🛠️ Tecnologías usadas
 
-🛠️ Tecnologías utilizadas
+- Python
 
-Python 3
+- MySQL
 
-MySQL
+- mysql-connector-python
 
-MySQL Connector / mysql-connector-python
+- Git & GitHub
 
-Git & GitHub
+---
 
-Ejecución desde consola (CLI)
+▶️ Cómo ejecutar el proyecto
+
+1. Clonar el repositorio
+
+2. Crear y activar un entorno virtual
+
+3. Instalar dependencias necesarias
+
+4. Crear la base de datos usando el archivo DataBase.sql
+
+5. Ejecutar el programa con: python -m app.main
+
+---
+
+🧠 Conceptos aplicados
+
+1. Programación modular
+
+2. Separación de responsabilidades
+
+3. CRUD con MySQL
+
+4. Manejo de errores básicos
+
+5. Uso de ramas en Git
+
+6. Flujo de trabajo con commits y merges
+
+---
+
+🧾 este proyecto puede se puede mejorar con una interfaz grafica solo es un punto de inicio para proyectos mas grandes.
+
+autor
+Miguel Rodriugez
+🌐 GitHub: @Miguel1941
+
+---
+
+🙌 Gracias por ver mi proyecto
+¡no dudes en dejar ⭐ en mis proyectos!
