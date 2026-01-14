@@ -70,7 +70,7 @@ El programa tiene las siguientes funciones:
 🧾 este proyecto puede se puede mejorar con una interfaz grafica solo es un punto de inicio para proyectos mas grandes.
 
 autor
-Miguel Rodriugez
+Miguel Rodriguez
 🌐 GitHub: @Miguel1941
 
 ---
